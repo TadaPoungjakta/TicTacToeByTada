@@ -38,8 +38,8 @@ public class GameHistory extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 BoardData board;
                 for(DataSnapshot ds:snapshot.getChildren()){
-                    Log.d("LIST",ds.getValue().toString());
-                    Log.d("Board",ds.child("Board").getValue().toString());
+                    //Log.d("LIST",ds.getValue().toString());
+                    //Log.d("Board",ds.child("Board").getValue().toString());
                     board = new BoardData(ds.getKey(),
                             ds.child("PlayTime").getValue().toString(),
                             ds.child("Board").getValue().toString(),

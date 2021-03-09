@@ -23,12 +23,7 @@ public class GameHistoryDetail extends AppCompatActivity {
         String Winner = intent.getStringExtra("Winner");
 
         String[] ss = GameData.split("[|]");
-        System.out.println("OUTPUT:      "+Arrays.toString(ss));
-
-        ArrayList<String> Test = new ArrayList<>();
-        Test.add("X O X O X O X");
-        Test.add("O O X O X X O");
-        Test.add("O X O O O X X");
+        //System.out.println("OUTPUT:      "+Arrays.toString(ss));
 
         ArrayAdapter < String > dataAdapter = new ArrayAdapter<String>( this, android.R.layout.simple_list_item_1, ss );
         ListView Board = findViewById(R.id.Board);

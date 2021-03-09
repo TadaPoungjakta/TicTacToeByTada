@@ -116,62 +116,61 @@ public class Game extends AppCompatActivity {
     public void calWinner(String[][]BoardPosition) {
         int match = 0;
         if (turncount == (BoardSize * BoardSize)) {
-            Intent intent = new Intent(this, GameOver.class);
-            //startActivity(intent);
-        }
-        //HorizoltalWin
-        for(int r=0;r<BoardSize;r++){
-            for(int c=0;c<BoardSize;c++){
-                System.out.println("ROW:  "+r+"COL:  "+c+"CHAR:     "+BoardPosition[r][c]+"         "+"ROW:  "+r+"COL:  "+(BoardSize-1)+"CHAR:     "+BoardPosition[r][BoardSize-1]+"     MATCH:    "+match);
-                if(BoardPosition[r][c]==BoardPosition[r][BoardSize-1]&&BoardPosition[r][c]!=null){
-                    match = match+1;
-                    if(match>=BoardSize){
-                        //System.out.println("BREAK HORIZONTAL WIN COMPLETE");
-                        //GameOver(BoardPosition[r][c]);
-                        savegamedata(BoardPosition,BoardPosition[r][c]);
-                        break;
+            savegamedata(BoardPosition,"DRAW");
+        }else{
+            //HorizoltalWin
+            for(int r=0;r<BoardSize;r++){
+                for(int c=0;c<BoardSize;c++){
+                    //System.out.println("ROW:  "+r+"COL:  "+c+"CHAR:     "+BoardPosition[r][c]+"         "+"ROW:  "+r+"COL:  "+(BoardSize-1)+"CHAR:     "+BoardPosition[r][BoardSize-1]+"     MATCH:    "+match);
+                    if(BoardPosition[r][c]==BoardPosition[r][BoardSize-1]&&BoardPosition[r][c]!=null){
+                        match = match+1;
+                        if(match>=BoardSize){
+                            //System.out.println("BREAK HORIZONTAL WIN COMPLETE");
+                            //GameOver(BoardPosition[r][c]);
+                            savegamedata(BoardPosition,BoardPosition[r][c]);
+                            break;
+                        }
+                    }else{
+                        match = 0;
                     }
-                }else{
-                    match = 0;
                 }
             }
-        }
-        //VerticalWin
-        for(int c=0;c<BoardSize;c++){
-            for(int r=0;r<BoardSize;r++){
-                System.out.println(BoardPosition[r][c]+"      "+BoardPosition[BoardSize-1][c]);
-                if(BoardPosition[r][c]==BoardPosition[BoardSize-1][c]&&BoardPosition[r][c]!=null){
+            //VerticalWin
+            for(int c=0;c<BoardSize;c++){
+                for(int r=0;r<BoardSize;r++){
+                    //System.out.println(BoardPosition[r][c]+"      "+BoardPosition[BoardSize-1][c]);
+                    if(BoardPosition[r][c]==BoardPosition[BoardSize-1][c]&&BoardPosition[r][c]!=null){
+                        match++;
+                        if(match>=BoardSize){
+                            //System.out.println("BREAK VERTICAL WIN COMPLETE");
+                            //GameOver(BoardPosition[r][c]);
+                            savegamedata(BoardPosition,BoardPosition[r][c]);
+                            break;
+                        }
+                    }else{
+                        match=0;
+                    }
+                }
+
+            }
+            //TopLtoBottomR
+            for(int i=0;i<BoardSize;i++){
+                if(BoardPosition[i][i]==BoardPosition[BoardSize-1][BoardSize-1]&&BoardPosition[i][i]!=null){
                     match++;
                     if(match>=BoardSize){
-                        //System.out.println("BREAK VERTICAL WIN COMPLETE");
-                        //GameOver(BoardPosition[r][c]);
-                        savegamedata(BoardPosition,BoardPosition[r][c]);
+                        //System.out.println("BREAK TLtoBR WIN COMPLETE");
+                        //GameOver(BoardPosition[i][i]);
+                        savegamedata(BoardPosition,BoardPosition[i][i]);
                         break;
                     }
                 }else{
                     match=0;
                 }
             }
-
-        }
-        //TopLtoBottomR
-        for(int i=0;i<BoardSize;i++){
-            if(BoardPosition[i][i]==BoardPosition[BoardSize-1][BoardSize-1]&&BoardPosition[i][i]!=null){
-                match++;
-                if(match>=BoardSize){
-                    //System.out.println("BREAK TLtoBR WIN COMPLETE");
-                    //GameOver(BoardPosition[i][i]);
-                    savegamedata(BoardPosition,BoardPosition[i][i]);
-                    break;
-                }
-            }else{
-                match=0;
-            }
-        }
-        //TopRToBottomL
-        int max = BoardSize-1;
-        for(int r=0;r<BoardSize;r++){
-                System.out.println(r+"  "+max+"       "+BoardPosition[r][max]+"        "+BoardPosition[BoardSize-1][0]);
+            //TopRToBottomL
+            int max = BoardSize-1;
+            for(int r=0;r<BoardSize;r++){
+                //System.out.println(r+"  "+max+"       "+BoardPosition[r][max]+"        "+BoardPosition[BoardSize-1][0]);
                 if(BoardPosition[r][max]==BoardPosition[BoardSize-1][0]&&BoardPosition[r][max]!=null){
                     match++;
                     if(match>=BoardSize){
@@ -183,8 +182,10 @@ public class Game extends AppCompatActivity {
                 }else{
                     match=0;
                 }
-            max--;
+                max--;
+            }
         }
+
     }
 
     public void savegamedata(String[][] BoardPosition,String Winner){

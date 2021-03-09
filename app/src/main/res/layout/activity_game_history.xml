@@ -8,8 +8,8 @@
 
     <ListView
         android:id="@+id/listgamehistory"
-        android:layout_width="331dp"
-        android:layout_height="347dp"
+        android:layout_width="299dp"
+        android:layout_height="704dp"
         android:layout_marginStart="40dp"
         android:layout_marginLeft="40dp"
         android:layout_marginTop="16dp"
